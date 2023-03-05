@@ -4,9 +4,19 @@ def getUserString():
     weightStr = input("""Enter your weight in pounds (ex. 123) """)
     return heightStr, weightStr
 
+def validateWeight(weightStr):
+    if(weightStr.isdigit()):
+        weight = float(weightStr)
+        if(weight > 0.0 and weight <= 1500.0):
+            return weight
+        else:
+            return 0
+    else:
+        return 0
+
 def formatString(usrStr):
     if(len(usrStr) == 4):
-        feet, inches = usrStr.split("'")
+        feet, inches = usrStr.split("'", 1)
         inches = inches.rstrip(inches[-1])
         return feet, inches
     else:
@@ -16,10 +26,13 @@ def formatString(usrStr):
     
 
 def convertStringToInt(feetStr, inchesStr):
-    feet = int(feetStr)
-    inches = int(inchesStr)
-    if(feet > 0 and feet < 9 and inches > -1 and inches < 13):
-        return feet, inches
+    if (feetStr.isdigit() and inchesStr.isdigit()):
+        feet = int(feetStr)
+        inches = int(inchesStr)
+        if(feet > 0 and feet < 9 and inches > -1 and inches < 13):
+            return feet, inches
+        else:
+            return 0, 0
     else:
         return 0, 0
 
@@ -60,7 +73,11 @@ def BMICalc():
             print("Check bounds, a person can not be taller than 8'11\" or have 0 height!")
             continue
         heightInches = calculateHeightInches(feet, inches)
-        bmiResult = calculateBMI(heightInches, int(weightInput))
+        weight = validateWeight(weightInput)
+        if(weight == 0):
+            print("check weight format and ensure it is over 0 and below 400: ")
+            continue
+        bmiResult = calculateBMI(heightInches, weight)
         bmiClass = classifyBMI(bmiResult)
         print("With a BMI of {}, you are considered {}".format(bmiResult, bmiClass))
         cont = input("""Calculate new BMI (yes) or exit (no): """)
@@ -70,9 +87,17 @@ def BMICalc():
 #temp, temp2 = formatString("6'2\"")
 #print(temp, temp2)
 
-BMICalc()
+#BMICalc()
 
 #testing getUserString function is difficult because there are two blocking calls to retrieve from STDIN
+
+#test the weight input sanitization function
+def test_validateWeight():
+    assert validateWeight("-1") == 0
+    assert validateWeight("0") == 0
+    assert validateWeight("150") == 150
+    assert validateWeight("1500") == 1500
+    assert validateWeight("1505") == 0
 
 #test the formatString function to ensure that it handles anything outside the boundaries correctly
 def test_formatString():
@@ -87,6 +112,7 @@ def test_convertStringToInt():
     assert convertStringToInt("6", "13") == (0, 0)
     assert convertStringToInt("10", "4") == (0, 0)
     assert convertStringToInt("5", "-1") == (0,0)
+    assert convertStringToInt("\"", "'") == (0, 0)
 
 #ensure conversion from feet to inches is correct in calculateHeightInches function
 def test_calcHeightInches():
