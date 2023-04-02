@@ -4,3 +4,6 @@ This is a simple BMI calculator that takes height in feet and inches (ex. 6'2") 
 To setup you will need the python interpreter and pytest (pip install pytest).
 run python test_BMI.py in command line to start application
 run pytest in directory of test_BMI.py from CMD line to runt test cases (make sure to comment out execution of the main function if you are running the test cases (#BMICalc())
+
+
+[![Coverage Status](https://coveralls.io/repos/github/vinnykuhnel/BMI_Calc/badge.svg?branch=main)](https://coveralls.io/github/vinnykuhnel/BMI_Calc?branch=main)
