@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Calculator</title>
+</head>
+<body>
+	<h1>BMI Calculator</h1>
+	<form action="#" method="POST">
+		{% csrf_token %}
+		<label for="height">Height (ft'in"): </label>
+		<input type="text" name="height" id="height" required><br><br>
+		<label for="weight">Weight (pounds): </label>
+		<input type="text" name="weight" id="weight" required><br><br>
+		<input type="submit" value="Calculate">
+	</form>
+	{% if bmi %}
+		<p>Your BMI is {{ bmi }}, and you would be classified as {{classification}}</p>
+	{% endif %}
+	{% if returnError %}
+		<p>{{returnError}}</p>
+	{% endif %}
+</body>
+</html>
