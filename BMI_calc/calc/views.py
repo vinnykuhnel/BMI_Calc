@@ -12,15 +12,15 @@ def calc(request):
         weight = calculator.validateWeight(weightStr)
         if(weight == 0):
                 returnError = "Looks like your inputs were invalid!"
-                return render(request, 'calc.html', {'returnError', returnError})
+                return render(request, 'calc.html', {'returnError': returnError})
         ftStr, inStr = calculator.formatString(heightStr)
         if(ftStr == "" or inStr == ""):
                 returnError = "Looks like your inputs were invalid!"
-                return render(request, 'calc.html', {'returnError', returnError})
+                return render(request, 'calc.html', {'returnError': returnError})
         feet, inches = calculator.convertStringToInt(ftStr, inStr)
         if(feet == 0 or (feet == 0 and inches == 0)):
                 returnError = "Looks like your inputs were invalid!"
-                return render(request, 'calc.html', {'returnError', returnError})
+                return render(request, 'calc.html', {'returnError': returnError})
         heightInches = calculator.calculateHeightInches(feet, inches)
         
         
