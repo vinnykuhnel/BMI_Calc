@@ -86,43 +86,49 @@ class BMICalc:
 
 #testing getUserString function is difficult because there are two blocking calls to retrieve from STDIN
 
-# #test the weight input sanitization function
-# def test_validateWeight():
-#     assert validateWeight("-1") == 0
-#     assert validateWeight("0") == 0
-#     assert validateWeight("150") == 150
-#     assert validateWeight("1500") == 1500
-#     assert validateWeight("1505") == 0
+#test the weight input sanitization function
+def test_validateWeight():
+    calc = BMICalc()
+    assert calc.validateWeight("-1") == 0
+    assert calc.validateWeight("0") == 0
+    assert calc.validateWeight("150") == 150
+    assert calc.validateWeight("1500") == 1500
+    assert calc.validateWeight("1505") == 0
 
-# #test the formatString function to ensure that it handles anything outside the boundaries correctly
-# def test_formatString():
-#     assert formatString("6'4\"") == ("6", "4")
-#     assert formatString("") == ("", "")
-#     assert formatString("6'7\"\"") == ("", "")
+#test the formatString function to ensure that it handles anything outside the boundaries correctly
+def test_formatString():
+    calc = BMICalc()
+    assert calc.formatString("6'4\"") == ("6", "4")
+    assert calc.formatString("") == ("", "")
+    assert calc.formatString("6'7\"\"") == ("", "")
 
-# #test the conversion function from string to int
-# def test_convertStringToInt():
-#     assert convertStringToInt("6", "4") == (6, 4)
-#     assert convertStringToInt("0", "5") == (0, 0)
-#     assert convertStringToInt("6", "13") == (0, 0)
-#     assert convertStringToInt("10", "4") == (0, 0)
-#     assert convertStringToInt("5", "-1") == (0,0)
-#     assert convertStringToInt("\"", "'") == (0, 0)
+#test the conversion function from string to int
+def test_convertStringToInt():
+    calc = BMICalc()
+    assert calc.convertStringToInt("6", "4") == (6, 4)
+    assert calc.convertStringToInt("0", "5") == (0, 0)
+    assert calc.convertStringToInt("6", "13") == (0, 0)
+    assert calc.convertStringToInt("10", "4") == (0, 0)
+    assert calc.convertStringToInt("5", "-1") == (0,0)
+    assert calc.convertStringToInt("\"", "'") == (0, 0)
 
-# #ensure conversion from feet to inches is correct in calculateHeightInches function
-# def test_calcHeightInches():
-#     assert calculateHeightInches(6, 2) == 74
-#     assert calculateHeightInches(1, 0) == 12
+#ensure conversion from feet to inches is correct in calculateHeightInches function
+def test_calcHeightInches():
+    calc = BMICalc()
+    assert calc.calculateHeightInches(6, 2) == 74
+    assert calc.calculateHeightInches(1, 0) == 12
 
-# #ensure BMI calculation and rounding is correct in calculateBMI function
-# def test_calculateBMI():
-#     assert calculateBMI(74, 178) == 23.4
+#ensure BMI calculation and rounding is correct in calculateBMI function
+def test_calculateBMI():
+    calc = BMICalc()
+    assert calc.calculateBMI(74, 178) == 23.4
 
-# #ensure that the classify function is working properly
-# def test_classifyBMI():
-#     assert classifyBMI(18.0) == "Underweight"
-#     assert classifyBMI(18.5) == "Normal Weight"
-#     assert classifyBMI(24.9) == "Normal Weight"
-#     assert classifyBMI(25.0) == "Overweight"
-#     assert classifyBMI(29.9) == "Overweight"
-#     assert classifyBMI(30.0) == "Obese" 
+#ensure that the classify function is working properly
+def test_classifyBMI():
+    calc = BMICalc()
+    assert calc.classifyBMI(18.0) == "Underweight"
+    assert calc.classifyBMI(18.5) == "Normal Weight"
+    assert calc.classifyBMI(24.9) == "Normal Weight"
+    assert calc.classifyBMI(25.0) == "Overweight"
+    assert calc.classifyBMI(29.9) == "Overweight"
+    assert calc.classifyBMI(30.0) == "Obese" 
