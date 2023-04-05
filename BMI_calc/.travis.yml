@@ -11,7 +11,7 @@ install:
   - pip install coveralls
 # To run tests
 script:
-  - coverage run --source=BMI_calc manage.py test
+  - coverage run --source=calc manage.py test
 # send coverage report to coveralls
 after_success:
   coveralls
